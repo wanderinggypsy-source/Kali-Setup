@@ -1,0 +1,59 @@
+ Widget 1: Show Machine Name
+📄 Create script:
+bash
+Copy
+Edit
+nano ~/.config/argos/box-name.10s.sh
+⌨️ Paste:
+bash
+Copy
+Edit
+#!/bin/bash
+
+BOX_FILE="$HOME/.currentboxinfo"
+
+if [[ -f "$BOX_FILE" ]]; then
+    source "$BOX_FILE"
+    MACHINE_NAME=${MACHINE_NAME:-"(no machine)"}
+    echo "💻 $MACHINE_NAME"
+else
+    echo "💻 (no file)"
+fi
+🔓 Make it executable:
+bash
+Copy
+Edit
+chmod +x ~/.config/argos/box-name.10s.sh
+🌐 Widget 2: Show Machine IP
+📄 Create script:
+bash
+Copy
+Edit
+nano ~/.config/argos/box-ip.10s.sh
+⌨️ Paste:
+bash
+Copy
+Edit
+#!/bin/bash
+
+BOX_FILE="$HOME/.currentboxinfo"
+
+if [[ -f "$BOX_FILE" ]]; then
+    source "$BOX_FILE"
+    MACHINE_IP=${MACHINE_IP:-"(no IP)"}
+    echo "🌐 $MACHINE_IP"
+else
+    echo "🌐 (no file)"
+fi
+🔓 Make it executable:
+bash
+Copy
+Edit
+chmod +x ~/.config/argos/box-ip.10s.sh
+🖥️ Result
+You'll now see two widgets in the top bar:
+
+Copy
+Edit
+💻 LAMP01     🌐 10.10.11.213
+They update every 10 seconds automatically.
