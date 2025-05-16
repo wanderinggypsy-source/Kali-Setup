@@ -1,0 +1,5 @@
+alias update='sudo apt update && sudo apt upgrade'
+alias remove='sudo apt autoremove'
+alias offsec='sudo openvpn ~/VPN/universal.ovpn'
+alias htb='sudo openvpn ~/VPN/lab_TheCinnamonToastCruncher.ovpn'
+alias 'start box'='sudo ./~/sctipts/boxstart.sh'
