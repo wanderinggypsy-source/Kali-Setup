@@ -18,7 +18,7 @@ BOX_FILE="$HOME/.currentboxinfo"
 if [[ -f "$BOX_FILE" ]]; then
     source "$BOX_FILE"
     MACHINE_NAME=${MACHINE_NAME:-"(no machine)"}
-    echo "💻 $MACHINE_NAME"
+    echo "Box: $MACHINE_NAME"
 else
     echo "💻 (no file)"
 fi
