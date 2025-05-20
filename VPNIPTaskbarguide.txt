@@ -1,48 +1,20 @@
-This guide adds a live display of your tun0/tun1 VPN IPs to the GNOME top bar using the Argos extension.
-
-✅ Prerequisites
-bash
-Copy
-Edit
+# Install dependencies
 sudo apt update
-sudo apt install git gnome-shell-extension-prefs
-📥 1. Clone the Argos Extension
-bash
-Copy
-Edit
+sudo apt install -y git gnome-shell-extension-prefs
+
+# Clone and install Argos extension
 git clone https://github.com/p-e-w/argos.git
-📁 2. Install Argos (user-level)
-bash
-Copy
-Edit
+mkdir -p ~/.local/share/gnome-shell/extensions/
 cp -r argos/argos@pew.worldwidemann.com ~/.local/share/gnome-shell/extensions/
-🔁 3. Restart GNOME Shell
-Press Alt + F2, type r, hit Enter (Xorg only), or
 
-Log out and back in (Wayland safe)
-
-✅ 4. Enable the Argos Extension
-bash
-Copy
-Edit
+# Enable Argos
 gnome-extensions enable argos@pew.worldwidemann.com
-You can also toggle it via the Extensions app.
 
-🗂️ 5. Create the Argos Script Directory
-bash
-Copy
-Edit
+# Create Argos scripts directory
 mkdir -p ~/.config/argos
-✏️ 6. Create the VPN IP Display Script
-bash
-Copy
-Edit
-nano ~/.config/argos/vpn-ip.5s.sh
-Paste the following:
 
-bash
-Copy
-Edit
+# Create VPN IP display script
+cat << 'EOF' > ~/.config/argos/vpn-ip.5s.sh
 #!/bin/bash
 
 TUN0_IP=$(ip -4 addr show tun0 2>/dev/null | grep -oP '(?<=inet\s)\d+(\.\d+){3}')
@@ -57,17 +29,10 @@ if [[ -n "$TUN0_IP" ]]; then
 else
     echo "VPN: No active VPN"
 fi
-Save and exit (Ctrl + O, Enter, Ctrl + X).
+EOF
 
-🔓 7. Make It Executable
-bash
-Copy
-Edit
+# Make it executable
 chmod +x ~/.config/argos/vpn-ip.5s.sh
-🎉 8. Done!
-Argos will now display your VPN IPs in the GNOME top bar and refresh every 5 seconds.
 
-If neither tun0 nor tun1 exists, it will show:
-VPN: No active VPN
-
-You can change the refresh rate by renaming the file to vpn-ip.10s.sh, vpn-ip.30s.sh, etc.
+# Restart GNOME Shell (for Xorg: press Alt+F2, type 'r', press Enter)
+# Or just log out and back in (for Wayland)
