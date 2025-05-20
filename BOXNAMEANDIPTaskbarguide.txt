@@ -1,13 +1,16 @@
- Widget 1: Show Machine Name
-📄 Create script:
-bash
-Copy
-Edit
-nano ~/.config/argos/box-name.10s.sh
-⌨️ Paste:
-bash
-Copy
-Edit
+# 🧩 Argos Widgets: Machine Name & IP in System Tray
+
+Displays your current target machine's **name** and **IP address** using Argos widgets. Updates every 10 seconds using a simple config file: `~/.currentboxinfo`.
+
+---
+
+## 📜 Create both widget scripts
+
+```bash
+mkdir -p ~/.config/argos
+
+# Widget 1: Machine Name
+cat << 'EOF' > ~/.config/argos/box-name.10s.sh
 #!/bin/bash
 
 BOX_FILE="$HOME/.currentboxinfo"
@@ -19,21 +22,10 @@ if [[ -f "$BOX_FILE" ]]; then
 else
     echo "💻 (no file)"
 fi
-🔓 Make it executable:
-bash
-Copy
-Edit
-chmod +x ~/.config/argos/box-name.10s.sh
-🌐 Widget 2: Show Machine IP
-📄 Create script:
-bash
-Copy
-Edit
-nano ~/.config/argos/box-ip.10s.sh
-⌨️ Paste:
-bash
-Copy
-Edit
+EOF
+
+# Widget 2: Machine IP
+cat << 'EOF' > ~/.config/argos/box-ip.10s.sh
 #!/bin/bash
 
 BOX_FILE="$HOME/.currentboxinfo"
@@ -45,15 +37,8 @@ if [[ -f "$BOX_FILE" ]]; then
 else
     echo "🌐 (no file)"
 fi
-🔓 Make it executable:
-bash
-Copy
-Edit
-chmod +x ~/.config/argos/box-ip.10s.sh
-🖥️ Result
-You'll now see two widgets in the top bar:
+EOF
 
-Copy
-Edit
-💻 LAMP01     🌐 10.10.11.213
-They update every 10 seconds automatically.
+# Make both executable
+chmod +x ~/.config/argos/box-name.10s.sh
+chmod +x ~/.config/argos/box-ip.10s.sh
